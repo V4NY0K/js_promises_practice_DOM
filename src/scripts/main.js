@@ -28,15 +28,13 @@ const promise1 = new Promise((resolve, reject) => {
   );
 });
 
-promise1.then((message) => {
-  const prev = document.querySelector('[data-qa="notification"]');
-
-  if (prev) {
-    prev.remove();
-  }
-
-  notification('success', message);
-});
+promise1
+  .then((message) => {
+    notification('success', message);
+  })
+  .catch((err) => {
+    notification('error', err.message);
+  });
 
 promise1.catch((err) => {
   const prev = document.querySelector('[data-qa="notification"]');
@@ -52,13 +50,9 @@ const promise2 = new Promise((resolve) => {
   const successMessage = 'Second promise was resolved';
   const body = document.querySelector('body');
 
-  body.addEventListener(
-    'click',
-    () => {
-      resolve(successMessage);
-    },
-    { once: true },
-  );
+  body.addEventListener('click', () => {
+    resolve(successMessage);
+  });
 
   body.addEventListener(
     'contextmenu',
@@ -71,12 +65,6 @@ const promise2 = new Promise((resolve) => {
 });
 
 promise2.then((message) => {
-  const prev = document.querySelector('[data-qa="notification"]');
-
-  if (prev) {
-    prev.remove();
-  }
-
   notification('success', message);
 });
 
