@@ -36,16 +36,6 @@ promise1
     notification('error', err.message);
   });
 
-promise1.catch((err) => {
-  const prev = document.querySelector('[data-qa="notification"]');
-
-  if (prev) {
-    prev.remove();
-  }
-
-  notification('error', err.message);
-});
-
 const promise2 = new Promise((resolve) => {
   const successMessage = 'Second promise was resolved';
   const body = document.querySelector('body');
